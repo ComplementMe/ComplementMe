@@ -8,7 +8,7 @@
 //   }
 // }
 // require at the top of the script
-require_once('vendor/autoload.php');
+require('vendor/autoload.php');
 
 // ...
 
@@ -16,4 +16,6 @@ $grapheneUrl = parse_url("http://app36675546:wCMi0lmUvgUi0YZCDE4W@app36675546.sb
 
 $client = new Everyman\Neo4j\Client($grapheneUrl['host'], $grapheneUrl['port']);
 $client->getTransport()->setAuth($grapheneUrl['user'], $grapheneUrl['pass']);
+
+print_r($client->getServerInfo());
 ?>
