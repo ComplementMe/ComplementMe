@@ -19,18 +19,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
+//returns a list of all the people this user follows
 
-//returns a global list of questions
 
-$queryString = "MATCH (n:Question) RETURN n";
+$getUserName = htmlspecialchars($_GET['username']);
+
+//MATCH (dawn { name:'dawn' })-->(Person) RETURN Person.name
+$queryString = "MATCH (" . $getUserName . " { name:'" . $getUserName . "' })-->(Person) RETURN Person.name";
 
 
 $query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
 $result = $query->getResultSet();
 
-Print_r($result);
+
+
 //return name of user. can add on properties if required
 foreach ($result as $row) {
-    echo $row['x']->getProperty('question') . "\n";
+    echo $row['Person.name'] . "\n";
 }
 ?>
+
