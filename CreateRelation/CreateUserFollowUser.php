@@ -18,11 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 
+
+//create a user follow user relation
+
 $getUser = htmlspecialchars($_GET['user']);
 $getFollowUser = htmlspecialchars($_GET['followuser']);
 
 
-$queryString = "MATCH (a:Person),(b:Person) WHERE a.name = '" . $getUser . "' AND b.name = '" . $getFollowUser . "' CREATE (a)-[r:Follows { name : a.name + '<->' + b.name }]->(b) RETURN r";
+$queryString = "Match (a:Person),(b:Person) WHERE a.name = '" . $getUser . "' AND b.name = '" . $getFollowUser . "' CREATE UNIQUE (a)-[r:Follows { name : a.name + '<->' + b.name }]->(b) RETURN r";
 
 
 $query = new Everyman\Neo4j\Cypher\Query($client, $queryString);

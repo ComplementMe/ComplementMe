@@ -19,6 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
+//updates an existing answer
+//takes in the existing answer, updates it with the new answer as specified in GET parameters
+
 $getAnswer = htmlspecialchars($_GET['answer']);
 $getNewAnswer = htmlspecialchars($_GET['newAnswer']);
 

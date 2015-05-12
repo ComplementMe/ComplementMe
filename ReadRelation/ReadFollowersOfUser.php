@@ -18,11 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 
+//INCOMPLETE
+//returns a list of all followers (username) of a specified user imcomplete
 
 
-//returns a global list of questions
+$getUserName = htmlspecialchars($_GET['username']);
 
-$queryString = "MATCH (n:Question) RETURN n";
+
+
+$queryString = "";
 
 
 $query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
@@ -31,6 +35,6 @@ $result = $query->getResultSet();
 
 //return name of user. can add on properties if required
 foreach ($result as $row) {
-    echo $row['x']->getProperty('question') . "\n";
+    echo $row['x']->getProperty('name') . "\n";
 }
 ?>

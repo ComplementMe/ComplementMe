@@ -19,18 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
+//Delete a user follow user relation
 
-//returns a global list of questions
+$getUser = htmlspecialchars($_GET['user']);
+$getFollowUser = htmlspecialchars($_GET['followuser']);
 
-$queryString = "MATCH (n:Question) RETURN n";
+
+$queryString = "MATCH a-[r:Follows]->b WHERE a.name = '" . $getUser . "' AND b.name = '" . $getFollowUser . "' DELETE r";
 
 
 $query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
 $result = $query->getResultSet();
-
-
-//return name of user. can add on properties if required
-foreach ($result as $row) {
-    echo $row['x']->getProperty('question') . "\n";
-}
 ?>

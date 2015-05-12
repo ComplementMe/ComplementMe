@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
+//deletes a specified question node
 
 $getQuestion = htmlspecialchars($_GET['question']);
 

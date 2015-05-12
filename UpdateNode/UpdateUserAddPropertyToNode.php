@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 
 //add property to the user.
-//takes in 3 arguments: username, property key, property value.
+//takes in 3 arguments: username, property key to add, property value to add
 
 $getUserName = htmlspecialchars($_GET['username']);
 $getKey = htmlspecialchars($_GET['key']);

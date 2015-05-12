@@ -18,6 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 
+
+//creates a question node
+
 $getQuestion = htmlspecialchars($_GET['question']);
 
 

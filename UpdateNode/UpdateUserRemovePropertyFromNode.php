@@ -19,13 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
-//add property to the user.
+//removes a property key value pair from a node
 //takes in 2 arguments: username, property key of property to remove
 
 $getUserName = htmlspecialchars($_GET['username']);
 $getKey = htmlspecialchars($_GET['key']);
-//$getValue = htmlspecialchars($_GET['value']);
-//MATCH (n:Person { name: 'abc' }) SET n.key=NULL return n
+
 
 $queryString = "MATCH (n:Person { name: '" . $getUserName . "' }) SET n." . $getKey . "= NULL return n";
 

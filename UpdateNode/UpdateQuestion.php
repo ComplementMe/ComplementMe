@@ -19,6 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
+//updates an existing question
+//takes in the existing question, updates it with the new question as specified in GET parameters
+
 $getQuestion = htmlspecialchars($_GET['question']);
 $getNewQuestion = htmlspecialchars($_GET['newquestion']);
 

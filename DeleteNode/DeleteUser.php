@@ -20,6 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 
 
+//deletes a specified user node
+
 $getUserName = htmlspecialchars($_GET['username']);
 
 

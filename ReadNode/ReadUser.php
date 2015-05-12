@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
+//returns a single node of a user
 
 
 $getUserName = htmlspecialchars($_GET['username']);

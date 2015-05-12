@@ -18,9 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 
-
-//add property to the user.
-//takes in 3 arguments: username, property key, property value.
+//updates property of a person node
+//takes in username, the key of the property and the value of the property to update
 
 $getUserName = htmlspecialchars($_GET['username']);
 $getKey = htmlspecialchars($_GET['key']);
