@@ -13,6 +13,8 @@ require_once('../vendor/autoload.php');
 // ...
 //$grapheneUrl = parse_url("http://app36675546:wCMi0lmUvgUi0YZCDE4W@app36675546.sb05.stations.graphenedb.com:24789");
 //heroku environment variable
+
+echo getenv('GRAPHENEDB_URL');
 $grapheneUrl = parse_url(getenv('GRAPHENEDB_URL'));
 
 
