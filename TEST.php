@@ -22,5 +22,5 @@ $client->getTransport()->setAuth($grapheneUrl['user'], $grapheneUrl['pass']);
 
 
 
-//print_r($client->getServerInfo());
+print_r($client->getServerInfo());
 ?>
