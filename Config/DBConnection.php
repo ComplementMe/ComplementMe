@@ -23,5 +23,5 @@ $client = new Everyman\Neo4j\Client($grapheneUrl['host'], $grapheneUrl['port']);
 $client->getTransport()->setAuth($grapheneUrl['user'], $grapheneUrl['pass']);
 
 // Test connection to server
-//print_r($client->getServerInfo());
+print_r($client->getServerInfo());
 ?>
