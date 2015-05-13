@@ -28,12 +28,10 @@ $getQuestion = htmlspecialchars($_GET['question']);
 //delete node with relations
 
 $queryString = "MATCH (n:Question { question: '" . $getQuestion . "' })-[r]-() DELETE n,r";
-$query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
-$result = $query->getResultSet();
+$response = $client->sendCypherQuery($queryString);
 
 
 //delete node with no relations
 $queryString = "MATCH (n:Question { question: '" . $getQuestion . "' }) DELETE n";
-$query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
-$result = $query->getResultSet();
+$response = $client->sendCypherQuery($queryString);
 ?>

@@ -29,12 +29,11 @@ $getUserName = htmlspecialchars($_GET['username']);
 //delete user with relations
 
 $queryString = "MATCH (n:Person { name: '" . $getUserName . "' })-[r]-() DELETE n,r";
-$query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
-$result = $query->getResultSet();
+$response = $client->sendCypherQuery($queryString);
+
 
 
 //delete user with no relations
 $queryString = "MATCH (n:Person { name: '" . $getUserName . "' }) DELETE n";
-$query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
-$result = $query->getResultSet();
+$response = $client->sendCypherQuery($queryString);
 ?>

@@ -30,6 +30,5 @@ $getNewQuestion = htmlspecialchars($_GET['newquestion']);
 $queryString = "MATCH (n:Question { question: '" . $getQuestion . "' }) SET n.question='" . $getNewQuestion . "' return n";
 
 
-$query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
-$result = $query->getResultSet();
+$response = $client->sendCypherQuery($queryString);
 ?>

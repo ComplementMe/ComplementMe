@@ -28,6 +28,5 @@ $getFollowUser = htmlspecialchars($_GET['followuser']);
 $queryString = "MATCH a-[r:Follows]->b WHERE a.name = '" . $getUser . "' AND b.name = '" . $getFollowUser . "' DELETE r";
 
 
-$query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
-$result = $query->getResultSet();
+$response = $client->sendCypherQuery($queryString);
 ?>

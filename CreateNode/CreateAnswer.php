@@ -28,6 +28,5 @@ $getAnswer = htmlspecialchars($_GET['answer']);
 $queryString = "MERGE (n:Answer { answer: '" . $getAnswer . "' }) RETURN n";
 
 
-$query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
-$result = $query->getResultSet();
+$response = $client->sendCypherQuery($queryString);
 ?>

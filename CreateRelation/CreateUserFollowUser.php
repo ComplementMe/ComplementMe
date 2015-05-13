@@ -28,6 +28,5 @@ $getFollowUser = htmlspecialchars($_GET['followuser']);
 $queryString = "Match (a:Person),(b:Person) WHERE a.name = '" . $getUser . "' AND b.name = '" . $getFollowUser . "' CREATE UNIQUE (a)-[r:Follows { name : a.name + '<->' + b.name }]->(b) RETURN r";
 
 
-$query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
-$result = $query->getResultSet();
+$response = $client->sendCypherQuery($queryString);
 ?>

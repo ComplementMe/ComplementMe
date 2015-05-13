@@ -30,6 +30,5 @@ $getValue = htmlspecialchars($_GET['value']);
 $queryString = "MATCH (n:Person { name: '" . $getUserName . "' }) SET n." . $getKey . "='" . $getValue . "' return n";
 
 
-$query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
-$result = $query->getResultSet();
+$response = $client->sendCypherQuery($queryString);
 ?>
