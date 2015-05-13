@@ -28,15 +28,11 @@ $getUserName = htmlspecialchars($_GET['username']);
 //MATCH (dawn { name:'dawn' })-->(Person) RETURN Person.name
 $queryString = "MATCH (" . $getUserName . " { name:'" . $getUserName . "' })<--(Person) RETURN Person.name";
 
+$client->sendCypherQuery($queryString);
 
-$query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
-$result = $query->getResultSet();
+$result = $client->getRows();
 
 
-
-//return name of user. can add on properties if required
-foreach ($result as $row) {
-    echo $row['Person.name'] . "\n";
-}
+var_dump($result);
 ?>
 

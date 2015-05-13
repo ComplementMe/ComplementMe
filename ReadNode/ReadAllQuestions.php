@@ -25,12 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 $queryString = "MATCH (n:Question) RETURN n";
 
 
-$query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
-$result = $query->getResultSet();
+$client->sendCypherQuery($queryString);
 
-Print_r($result);
-//return name of user. can add on properties if required
-foreach ($result as $row) {
-    echo $row['x']->getProperty('question') . "\n";
-}
+$result = $client->getRows();
+
+
+var_dump($result);
 ?>
