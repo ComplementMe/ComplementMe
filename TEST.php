@@ -1,22 +1,12 @@
 <?php
 
-// https://github.com/jadell/neo4jphp
-// in composer.json:
-// {
-//   "require": {
-//     "everyman/neo4jphp": "dev-master"
-//   }
-// }
-// require at the top of the script
-//require('vendor/autoload.php');
-
 require_once 'vendor/autoload.php';
 
 use Neoxygen\NeoClient\ClientBuilder;
 
 // ...
 
-$grapheneUrl = parse_url(getenv('GRAPHENEDB_URL'));
+$url = parse_url("http://app36675546:wCMi0lmUvgUi0YZCDE4W@app36675546.sb05.stations.graphenedb.com:24789");
 
 ////this line is the problem with heroku... it cant seem to detect the class.
 //$client = new Everyman\Neo4j\Client($grapheneUrl['host'], $grapheneUrl['port']);
@@ -29,5 +19,6 @@ $client = ClientBuilder::create()
         ->setAutoFormatResponse(true)
         ->build();
 
-//print_r($client->getServerInfo());
+
+print_r($client->getNeoClientVersion());
 ?>
