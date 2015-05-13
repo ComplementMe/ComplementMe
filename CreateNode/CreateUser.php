@@ -25,10 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 $getUserName = htmlspecialchars($_GET['username']);
 
 
-
 $queryString = "MERGE (n:Person { name: '" . $getUserName . "' }) RETURN n";
 
-
-$query = new Everyman\Neo4j\Cypher\Query($client, $queryString);
-$result = $query->getResultSet();
+$response = $client->sendCypherQuery($queryString);
 ?>

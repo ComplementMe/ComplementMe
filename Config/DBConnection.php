@@ -20,5 +20,5 @@ $client = ClientBuilder::create()
         ->build();
 
 
-print_r($client->getNeoClientVersion());
+//print_r($client->getNeoClientVersion());
 ?>
