@@ -23,10 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 $getQuestion = htmlspecialchars($_GET['question']);
 
-
-
 $queryString = "MERGE (n:Question { question: '" . $getQuestion . "' }) RETURN n";
-
 
 $client->sendCypherQuery($queryString);
 
