@@ -29,5 +29,13 @@ $getKey = htmlspecialchars($_GET['key']);
 $queryString = "MATCH (n:Person { name: '" . $getUserName . "' }) SET n." . $getKey . "= NULL return n";
 
 
-$response = $client->sendCypherQuery($queryString);
+$client->sendCypherQuery($queryString);
+
+$result = $client->getRows();
+
+header("Content-type: application/json");
+
+$JSON_RETURN = json_encode($result);
+
+echo $JSON_RETURN;
 ?>

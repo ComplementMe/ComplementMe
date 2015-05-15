@@ -26,13 +26,12 @@ $getUserName = htmlspecialchars($_GET['username']);
 
 
 
-$queryString = "MATCH (n:User { name: '" . $getUserName . "' }) RETURN n";
+$queryString = "MATCH (n:Person { name: '" . $getUserName . "' }) RETURN n";
 
 
 $client->sendCypherQuery($queryString);
-
 $result = $client->getRows();
-
-
-var_dump($result);
+$JSON_RETURN = json_encode($result);
+header("Content-type: application/json");
+echo $JSON_RETURN;
 ?>

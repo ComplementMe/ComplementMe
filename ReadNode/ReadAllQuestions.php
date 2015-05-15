@@ -24,11 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 $queryString = "MATCH (n:Question) RETURN n";
 
-
 $client->sendCypherQuery($queryString);
-
 $result = $client->getRows();
-
-
-var_dump($result);
+$JSON_RETURN = json_encode($result);
+header("Content-type: application/json");
+echo $JSON_RETURN;
 ?>

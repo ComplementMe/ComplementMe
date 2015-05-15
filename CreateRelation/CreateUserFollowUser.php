@@ -28,5 +28,13 @@ $getFollowUser = htmlspecialchars($_GET['followuser']);
 $queryString = "Match (a:Person),(b:Person) WHERE a.name = '" . $getUser . "' AND b.name = '" . $getFollowUser . "' CREATE UNIQUE (a)-[r:Follows { name : a.name + '<->' + b.name }]->(b) RETURN r";
 
 
-$response = $client->sendCypherQuery($queryString);
+$client->sendCypherQuery($queryString);
+
+$result = $client->getRows();
+
+header("Content-type: application/json");
+
+$JSON_RETURN = json_encode($result);
+
+echo $JSON_RETURN;
 ?>

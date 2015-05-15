@@ -28,5 +28,9 @@ $getFollowUser = htmlspecialchars($_GET['followuser']);
 $queryString = "MATCH a-[r:Follows]->b WHERE a.name = '" . $getUser . "' AND b.name = '" . $getFollowUser . "' DELETE r";
 
 
-$response = $client->sendCypherQuery($queryString);
+$client->sendCypherQuery($queryString);
+$result = $client->getRows();
+$JSON_RETURN = json_encode($result);
+header("Content-type: application/json");
+echo $JSON_RETURN;
 ?>

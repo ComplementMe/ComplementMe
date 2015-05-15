@@ -28,10 +28,25 @@ $getQuestion = htmlspecialchars($_GET['question']);
 //delete node with relations
 
 $queryString = "MATCH (n:Question { question: '" . $getQuestion . "' })-[r]-() DELETE n,r";
-$response = $client->sendCypherQuery($queryString);
+$client->sendCypherQuery($queryString);
 
+$result = $client->getRows();
+
+header("Content-type: application/json");
+
+$JSON_RETURN = json_encode($result);
+
+echo $JSON_RETURN;
 
 //delete node with no relations
 $queryString = "MATCH (n:Question { question: '" . $getQuestion . "' }) DELETE n";
-$response = $client->sendCypherQuery($queryString);
+$client->sendCypherQuery($queryString);
+
+$result = $client->getRows();
+
+header("Content-type: application/json");
+
+$JSON_RETURN = json_encode($result);
+
+echo $JSON_RETURN;
 ?>

@@ -28,5 +28,13 @@ $getAnswer = htmlspecialchars($_GET['answer']);
 $queryString = "MERGE (n:Answer { answer: '" . $getAnswer . "' }) RETURN n";
 
 
-$response = $client->sendCypherQuery($queryString);
+$client->sendCypherQuery($queryString);
+
+$result = $client->getRows();
+
+header("Content-type: application/json");
+
+$JSON_RETURN = json_encode($result);
+
+echo $JSON_RETURN;
 ?>

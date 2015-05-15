@@ -29,11 +29,24 @@ $getUserName = htmlspecialchars($_GET['username']);
 //delete user with relations
 
 $queryString = "MATCH (n:Person { name: '" . $getUserName . "' })-[r]-() DELETE n,r";
-$response = $client->sendCypherQuery($queryString);
+$client->sendCypherQuery($queryString);
 
+$result = $client->getRows();
+
+header("Content-type: application/json");
+
+var_dump($result);
+$JSON_RETURN = json_encode($result);
+
+echo $JSON_RETURN;
 
 
 //delete user with no relations
 $queryString = "MATCH (n:Person { name: '" . $getUserName . "' }) DELETE n";
-$response = $client->sendCypherQuery($queryString);
+$client->sendCypherQuery($queryString);
+
+$result = $client->getRows();
+$JSON_RETURN = json_encode($result);
+
+echo $JSON_RETURN;
 ?>

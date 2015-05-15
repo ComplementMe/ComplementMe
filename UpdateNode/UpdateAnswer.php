@@ -30,5 +30,13 @@ $getNewAnswer = htmlspecialchars($_GET['newAnswer']);
 $queryString = "MATCH (n:Answer { answer: '" . $getAnswer . "' }) SET n.answer='" . $getNewAnswer . "' return n";
 
 
-$response = $client->sendCypherQuery($queryString);
+$client->sendCypherQuery($queryString);
+
+$result = $client->getRows();
+
+header("Content-type: application/json");
+
+$JSON_RETURN = json_encode($result);
+
+echo $JSON_RETURN;
 ?>
