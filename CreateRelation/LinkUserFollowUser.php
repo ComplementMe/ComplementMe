@@ -21,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 //create a user follow user relation
 
-$getUser = htmlspecialchars($_GET['user']);
-$getFollowUser = htmlspecialchars($_GET['followuser']);
+$getUser = htmlspecialchars($_GET['userID']);
+$getFollowUser = htmlspecialchars($_GET['followUserID']);
 
 
-$queryString = "Match (a:Person),(b:Person) WHERE a.name = '" . $getUser . "' AND b.name = '" . $getFollowUser . "' CREATE UNIQUE (a)-[r:Follows { name : a.name + '<->' + b.name }]->(b) RETURN r";
+$queryString = "Match (a:Person),(b:Person) WHERE a.userID = '" . $getUser . "' AND b.userID = '" . $getFollowUser . "' CREATE UNIQUE (a)-[r:Follows { userID : a.userID + '<->' + b.userID }]->(b) RETURN r";
 
 
 $client->sendCypherQuery($queryString);

@@ -22,10 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 //creates a user node
 
-$getUserName = htmlspecialchars($_GET['username']);
+$getUserID = htmlspecialchars($_GET['userID']);
 
 
-$queryString = "MERGE (n:Person { name: '" . $getUserName . "' }) RETURN n";
+$queryString = "MERGE (n:Person { userID: '" . $getUserID . "' }) RETURN n";
 
 $client->sendCypherQuery($queryString);
 

@@ -18,34 +18,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 
+//create a user follow user relation
+
+$getUser = htmlspecialchars($_GET['userID']);
+$getFollowQuestion = htmlspecialchars($_GET['question']);
 
 
-//deletes a specified user node
-
-$getUserName = htmlspecialchars($_GET['userID']);
+$queryString = "Match (a:Person),(b:Question) WHERE a.userID = '" . $getUser . "' AND b.question = '" . $getFollowQuestion . "' CREATE UNIQUE (a)-[r:Follows { name : a.userID + '<->' + b.question }]->(b) RETURN r";
 
 
-
-//delete user with relations
-
-$queryString = "MATCH (n:Person { userID: '" . $getUserName . "' })-[r]-() DELETE n,r";
 $client->sendCypherQuery($queryString);
 
 $result = $client->getRows();
 
 header("Content-type: application/json");
 
-var_dump($result);
-$JSON_RETURN = json_encode($result);
-
-echo $JSON_RETURN;
-
-
-//delete user with no relations
-$queryString = "MATCH (n:Person { userID: '" . $getUserName . "' }) DELETE n";
-$client->sendCypherQuery($queryString);
-
-$result = $client->getRows();
 $JSON_RETURN = json_encode($result);
 
 echo $JSON_RETURN;

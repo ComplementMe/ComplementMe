@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 //returns a single node of a user
 
 
-$getUserName = htmlspecialchars($_GET['username']);
+$getUserName = htmlspecialchars($_GET['userID']);
 
 
 
-$queryString = "MATCH (n:Person { name: '" . $getUserName . "' }) RETURN n";
+$queryString = "MATCH (n:Person { userID: '" . $getUserName . "' }) RETURN n";
 
 
 $client->sendCypherQuery($queryString);

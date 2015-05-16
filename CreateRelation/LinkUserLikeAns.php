@@ -21,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 //create a user follow user relation
 
-$getUser = htmlspecialchars($_GET['user']);
+$getUser = htmlspecialchars($_GET['userID']);
 $getLikeAnswer = htmlspecialchars($_GET['answer']);
 
 
-$queryString = "Match (a:Person),(b:Answer) WHERE a.name = '" . $getUser . "' AND b.answer = '" . $getLikeAnswer . "' CREATE UNIQUE (a)-[r:Likes { name : a.name + '<->' + b.answer }]->(b) RETURN r";
+$queryString = "Match (a:Person),(b:Answer) WHERE a.userID = '" . $getUser . "' AND b.answer = '" . $getLikeAnswer . "' CREATE UNIQUE (a)-[r:Likes { userID : a.userID + '<->' + b.answer }]->(b) RETURN r";
 
 
 $client->sendCypherQuery($queryString);

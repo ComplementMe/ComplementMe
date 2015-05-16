@@ -21,6 +21,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 //creates a question node
 
+/* $getQuestion = htmlspecialchars($_GET['question']);
+
+  $randomID = md5(time() . rand() . rand());
+
+
+  $queryString = "MERGE (n:Question { questionID : '" . $randomID . "' , question: '" . $getQuestion . "' }) RETURN n";
+
+  $client->sendCypherQuery($queryString);
+  $result = $client->getRows();
+  header("Content-type: application/json");
+  $JSON_RETURN = json_encode($result);
+  echo $JSON_RETURN; */
+
 $getQuestion = htmlspecialchars($_GET['question']);
 
 $queryString = "MERGE (n:Question { question: '" . $getQuestion . "' }) RETURN n";

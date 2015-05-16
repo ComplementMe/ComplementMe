@@ -21,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 //Delete a user follow user relation
 
-$getUser = htmlspecialchars($_GET['user']);
-$getFollowUser = htmlspecialchars($_GET['followuser']);
+$getUser = htmlspecialchars($_GET['userID']);
+$getFollowUser = htmlspecialchars($_GET['followUserID']);
 
 
-$queryString = "MATCH a-[r:Follows]->b WHERE a.name = '" . $getUser . "' AND b.name = '" . $getFollowUser . "' DELETE r";
+$queryString = "MATCH a-[r:Follows]->b WHERE a.userID = '" . $getUser . "' AND b.userID = '" . $getFollowUser . "' DELETE r";
 
 
 $client->sendCypherQuery($queryString);

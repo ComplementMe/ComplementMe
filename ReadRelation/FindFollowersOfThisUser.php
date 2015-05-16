@@ -23,10 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 
 
-$getUserName = htmlspecialchars($_GET['username']);
+$getUserName = htmlspecialchars($_GET['userID']);
 
 //MATCH (dawn { name:'dawn' })-->(Person) RETURN Person.name
-$queryString = "MATCH (" . $getUserName . " { name:'" . $getUserName . "' })<--(Person) RETURN Person.name";
+$queryString = "MATCH (" . $getUserName . " { userID:'" . $getUserName . "' })<--(Person) RETURN Person.userID";
 
 $client->sendCypherQuery($queryString);
 

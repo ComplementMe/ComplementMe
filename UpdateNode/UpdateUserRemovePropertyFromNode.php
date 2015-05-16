@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 //removes a property key value pair from a node
 //takes in 2 arguments: username, property key of property to remove
 
-$getUserName = htmlspecialchars($_GET['username']);
+$getUserName = htmlspecialchars($_GET['userID']);
 $getKey = htmlspecialchars($_GET['key']);
 
 
-$queryString = "MATCH (n:Person { name: '" . $getUserName . "' }) SET n." . $getKey . "= NULL return n";
+$queryString = "MATCH (n:Person { userID: '" . $getUserName . "' }) SET n." . $getKey . "= NULL return n";
 
 
 $client->sendCypherQuery($queryString);

@@ -22,13 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 //add property to the user.
 //takes in 3 arguments: username, property key to add, property value to add
 
-$getUserName = htmlspecialchars($_GET['username']);
+$getUserName = htmlspecialchars($_GET['userID']);
 $getKey = htmlspecialchars($_GET['key']);
 $getValue = htmlspecialchars($_GET['value']);
 
 //MATCH (n:Person { name: 'abc' }) SET n.key='value' return n
 
-$queryString = "MATCH (n:Person { name: '" . $getUserName . "' }) SET n." . $getKey . "='" . $getValue . "' return n";
+$queryString = "MATCH (n:Person { userID: '" . $getUserName . "' }) SET n." . $getKey . "='" . $getValue . "' return n";
 
 
 $client->sendCypherQuery($queryString);
