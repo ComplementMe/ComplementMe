@@ -19,19 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
-//creates a question node
+
 
 $getQuestion = htmlspecialchars($_GET['question']);
 
-$queryString = "MERGE (n:Question { question: '" . $getQuestion . "' }) RETURN n";
+
+
+$queryString = "MATCH (n:Question { question: '" . $getQuestion . "' }) RETURN n";
+
 
 $client->sendCypherQuery($queryString);
-
 $result = $client->getRows();
-
-header("Content-type: application/json");
-
 $JSON_RETURN = json_encode($result);
-
+header("Content-type: application/json");
 echo $JSON_RETURN;
 ?>
