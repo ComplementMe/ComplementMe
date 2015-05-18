@@ -19,20 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
-//creates a question node
 
-/* $getQuestion = htmlspecialchars($_GET['question']);
-
-  $randomID = md5(time() . rand() . rand());
-
-
-  $queryString = "MERGE (n:Question { questionID : '" . $randomID . "' , question: '" . $getQuestion . "' }) RETURN n";
-
-  $client->sendCypherQuery($queryString);
-  $result = $client->getRows();
-  header("Content-type: application/json");
-  $JSON_RETURN = json_encode($result);
-  echo $JSON_RETURN; */
+//REMEMBER TO CHANGE APPROVED BACK TO PENDING APPROVAL after sprint 1
 
 $getQnCreator = htmlspecialchars($_GET['userID']);
 $getQuestion = htmlspecialchars($_GET['question']);
@@ -41,7 +29,7 @@ $getQuestion = htmlspecialchars($_GET['question']);
 date_default_timezone_set("Asia/Singapore");
 $creationTimestamp = date('Y-m-d H:i:s', time());
 
-$queryString = "MERGE (n:Question { question: '" . $getQuestion . "' , status:'PendingApproval' , createdDate : '" . $creationTimestamp . "', modifiedDate : '" . $creationTimestamp . "', createdBy:'" . $getQnCreator . "', modifiedBy:'" . $getQnCreator . "' }) RETURN n";
+$queryString = "MERGE (n:Question { question: '" . $getQuestion . "' , status:'approved' , createdDate : '" . $creationTimestamp . "', modifiedDate : '" . $creationTimestamp . "', createdBy:'" . $getQnCreator . "', modifiedBy:'" . $getQnCreator . "' }) RETURN n";
 
 $client->sendCypherQuery($queryString);
 $result = $client->getRows();
