@@ -34,9 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
   $JSON_RETURN = json_encode($result);
   echo $JSON_RETURN; */
 
+$getQnCreator = htmlspecialchars($_GET['userID']);
 $getQuestion = htmlspecialchars($_GET['question']);
 
-$queryString = "MERGE (n:Question { question: '" . $getQuestion . "' }) RETURN n";
+
+date_default_timezone_set("Asia/Singapore");
+$creationTimestamp = date('Y-m-d H:i:s', time());
+
+$queryString = "MERGE (n:Question { question: '" . $getQuestion . "' , status:'PendingApproval' , createdDate : '" . $creationTimestamp . "', modifiedDate : '" . $creationTimestamp . "', createdBy:'" . $getQnCreator . "', modifiedBy:'" . $getQnCreator . "' }) RETURN n";
 
 $client->sendCypherQuery($queryString);
 $result = $client->getRows();

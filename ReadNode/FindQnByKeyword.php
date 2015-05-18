@@ -19,30 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
-
-//creates a user node
-//username, pw, email,gender
-
-$getUserID = htmlspecialchars($_GET['userID']);
-$getPW = htmlspecialchars($_GET['password']);
-$getEmail = htmlspecialchars($_GET['email']);
-$getGender = htmlspecialchars($_GET['gender']);
+//returns a single node of a user
 
 
-date_default_timezone_set("Asia/Singapore");
-$creationTimestamp = date('Y-m-d H:i:s', time());
+$getKeyword = htmlspecialchars($_GET['question']);
 
 
-$queryString = "MERGE (n:Person { userID: '" . $getUserID . "', password : '" . $getPW . "', email: '" . $getEmail . "', gender: '" . $getGender . "' "
-        . ", createdDate: '" . $creationTimestamp . "', modifiedDate: '" . $creationTimestamp . "', createdBy: '" . $getUserID . "', modifiedBy: '" . $getUserID . "'}) RETURN n";
+
+$queryString = "MATCH (n:Question) WHERE n.question =~ '(?i).*" . $getKeyword . ".*' RETURN n.question";
+
 
 $client->sendCypherQuery($queryString);
-
 $result = $client->getRows();
-
-header("Content-type: application/json");
-
 $JSON_RETURN = json_encode($result);
-
+header("Content-type: application/json");
 echo $JSON_RETURN;
 ?>
