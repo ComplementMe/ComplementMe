@@ -19,34 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
-//deletes a specified interest node
-
-$getQuestion = strtoupper(htmlspecialchars($_GET['interest']));
 
 
+$getUserName = htmlspecialchars($_GET['userID']);
 
-//delete node with relations
 
-$queryString = "MATCH (n:Interest { interest: '" . $getQuestion . "' })-[r]-() DELETE n,r";
+$queryString = "MATCH (" . $getUserName . " { userID:'" . $getUserName . "' })-[:Dislikes]->(Interest) RETURN Interest.interest";
+
+
 $client->sendCypherQuery($queryString);
-
 $result = $client->getRows();
-
-header("Content-type: application/json");
-
 $JSON_RETURN = json_encode($result);
-
-echo $JSON_RETURN;
-
-//delete node with no relations
-$queryString = "MATCH (n:Interest { interest: '" . $getQuestion . "' }) DELETE n";
-$client->sendCypherQuery($queryString);
-
-$result = $client->getRows();
-
 header("Content-type: application/json");
-
-$JSON_RETURN = json_encode($result);
-
 echo $JSON_RETURN;
 ?>

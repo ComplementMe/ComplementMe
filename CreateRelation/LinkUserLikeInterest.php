@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 //create a user follow user relation
 
 $getUser = htmlspecialchars($_GET['userID']);
-$getLikeInterest = htmlspecialchars($_GET['interest']);
+$getLikeInterest = strtoupper(htmlspecialchars($_GET['interest']));
 
 
 $queryString = "Match (a:Person),(b:Interest) WHERE a.userID = '" . $getUser . "' AND b.interest = '" . $getLikeInterest . "' CREATE UNIQUE (a)-[r:Likes { userID : a.userID + '<->' + b.interest }]->(b) RETURN r";

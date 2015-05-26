@@ -20,21 +20,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 
 //creates an answer node
-
+$getAnsCreator = htmlspecialchars($_GET['userID']);
 $getAnswer = htmlspecialchars($_GET['answer']);
 
+date_default_timezone_set("Asia/Singapore");
+$creationTimestamp = date('Y-m-d H:i:s', time());
 
-
-$queryString = "MERGE (n:Answer { answer: '" . $getAnswer . "' }) RETURN n";
+$queryString = "MERGE (n:Answer { answer: '" . $getAnswer . "' , noOfComplain:'0' , createdDate : '" . $creationTimestamp . "', modifiedDate : '" . $creationTimestamp . "', createdBy:'" . $getAnsCreator . "', modifiedBy:'" . $getAnsCreator . "' }) RETURN n";
 
 
 $client->sendCypherQuery($queryString);
-
 $result = $client->getRows();
-
 header("Content-type: application/json");
-
 $JSON_RETURN = json_encode($result);
-
 echo $JSON_RETURN;
 ?>

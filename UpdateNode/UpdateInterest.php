@@ -22,11 +22,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 //updates an existing interest
 //takes in the existing interest, updates it with the new question as specified in GET parameters
 
-$getInterest = htmlspecialchars($_GET['interest']);
-$getNewInterest = htmlspecialchars($_GET['newInterest']);
+$modifiedBy = htmlspecialchars($_GET['userID']);
+$getInterest = strtoupper(htmlspecialchars($_GET['interest']));
+$getNewInterest = strtoupper(htmlspecialchars($_GET['newInterest']));
 
 
-$queryString = "MATCH (n:Interest { interest: '" . $getInterest . "' }) SET n.interest='" . $getNewInterest . "' return n";
+date_default_timezone_set("Asia/Singapore");
+$timestamp = date('Y-m-d H:i:s', time());
+
+$queryString = "MATCH (n:Interest { interest: '" . $getInterest . "' }) SET n.interest='" . $getNewInterest . "', n.modifiedDate= '" . $timestamp . "' , n.modifiedBy='" . $modifiedBy . "' return n";
 
 
 $client->sendCypherQuery($queryString);

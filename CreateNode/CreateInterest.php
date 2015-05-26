@@ -19,22 +19,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
-//creates an answer node
+//creates an interest node
+//FOR NOW ONLY BY ADMIN...
+//CREATE CONSTRAINT ON (interest:Interest) ASSERT interest.interest IS UNIQUE
 
+$getInterestCreator = htmlspecialchars($_GET['userID']);
 $getInterest = strtoupper(htmlspecialchars($_GET['interest']));
 
+date_default_timezone_set("Asia/Singapore");
+$creationTimestamp = date('Y-m-d H:i:s', time());
 
-
-$queryString = "MERGE (n:Interest { interest: '" . $getInterest . "' }) RETURN n";
-
+$queryString = "MERGE (n:Interest { interest: '" . $getInterest . "' , status:'approved' , createdDate : '" . $creationTimestamp . "', modifiedDate : '" . $creationTimestamp . "', createdBy:'" . $getInterestCreator . "', modifiedBy:'" . $getInterestCreator . "' }) RETURN n";
 
 $client->sendCypherQuery($queryString);
-
 $result = $client->getRows();
 
 header("Content-type: application/json");
-
 $JSON_RETURN = json_encode($result);
-
 echo $JSON_RETURN;
 ?>

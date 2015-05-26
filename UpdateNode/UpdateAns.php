@@ -22,12 +22,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 //updates an existing answer
 //takes in the existing answer, updates it with the new answer as specified in GET parameters
 
+$getmodificationUser = htmlspecialchars($_GET['modifiedby']);
 $getAnswer = htmlspecialchars($_GET['answer']);
 $getNewAnswer = htmlspecialchars($_GET['newAnswer']);
 
-//MATCH (n:Person { name: 'abc' }) SET n.key='value' return n
+date_default_timezone_set("Asia/Singapore");
+$timestamp = date('Y-m-d H:i:s', time());
 
-$queryString = "MATCH (n:Answer { answer: '" . $getAnswer . "' }) SET n.answer='" . $getNewAnswer . "' return n";
+
+$queryString = "MATCH (n:Answer { answer: '" . $getAnswer . "' }) SET n.answer='" . $getNewAnswer . "', n.modifiedDate= '" . $timestamp . "' , n.modifiedBy='" . $getmodificationUser . "' return n";
 
 
 $client->sendCypherQuery($queryString);
