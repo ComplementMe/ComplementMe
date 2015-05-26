@@ -19,26 +19,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
-//create a ans qn relation
-
-$getAnswer = htmlspecialchars($_GET['answer']);
-$getQuestion = htmlspecialchars($_GET['question']);
+//returns a list of all the people this user follows
 
 
-date_default_timezone_set("Asia/Singapore");
-$creationTimestamp = date('Y-m-d H:i:s', time());
+$userID = htmlspecialchars($_GET['userID']);
 
-
-$queryString = "Match (a:Answer),(b:Question) WHERE a.answer = '" . $getAnswer . "' AND b.question = '" . $getQuestion . "' CREATE UNIQUE (a)-[r:AnswerOf {date:'" . $creationTimestamp . "', linkQnA : a.answer + '<->' + b.question }]->(b) RETURN r";
+//MATCH (dawn { name:'dawn' })-->(Person) RETURN Person.name
+$queryString = "MATCH (" . $userID . " { userID:'" . $userID . "' })<--(Question) RETURN Question.question";
 
 
 $client->sendCypherQuery($queryString);
 
 $result = $client->getRows();
 
-header("Content-type: application/json");
-
 $JSON_RETURN = json_encode($result);
 
+header("Content-type: application/json");
 echo $JSON_RETURN;
 ?>
+
