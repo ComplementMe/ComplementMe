@@ -18,25 +18,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
 }
 
-//create a user follow qn relation
+
+//Delete a user follow user relation
 
 $getUser = htmlspecialchars($_GET['userID']);
 $getFollowQuestion = htmlspecialchars($_GET['question']);
 
-date_default_timezone_set("Asia/Singapore");
-$creationTimestamp = date('Y-m-d H:i:s', time());
 
-
-$queryString = "Match (a:Person),(b:Question) WHERE a.userID = '" . $getUser . "' AND b.question = '" . $getFollowQuestion . "' CREATE UNIQUE (a)-[r:Follows { follows : a.userID + '<->' + b.question, date : '" . $creationTimestamp . "' }]->(b) RETURN r";
+$queryString = "MATCH a-[r:Follows]->b WHERE a.userID = '" . $getUser . "' AND b.question = '" . $getFollowQuestion . "' DELETE r";
 
 
 $client->sendCypherQuery($queryString);
-
 $result = $client->getRows();
-
-header("Content-type: application/json");
-
 $JSON_RETURN = json_encode($result);
-
+header("Content-type: application/json");
 echo $JSON_RETURN;
 ?>
