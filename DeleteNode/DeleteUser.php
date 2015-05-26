@@ -35,7 +35,6 @@ $result = $client->getRows();
 
 header("Content-type: application/json");
 
-var_dump($result);
 $JSON_RETURN = json_encode($result);
 
 echo $JSON_RETURN;
