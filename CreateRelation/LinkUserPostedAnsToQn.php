@@ -25,9 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 //bob, icantswim, alice, canyouswim
 
 $getUser = htmlspecialchars($_GET['userID']);
-$answer = htmlspecialchars($_GET['answer']);
+$getAnswer = htmlspecialchars($_GET['answer']);
 $getReplyTo = htmlspecialchars($_GET['userReplyTo']);
-$question = htmlspecialchars($_GET['question']);
+$getQuestion = htmlspecialchars($_GET['question']);
 
 
 date_default_timezone_set("Asia/Singapore");
@@ -38,7 +38,7 @@ $creationTimestamp = date('Y-m-d H:i:s', time());
 //create relationship from userID to answer, this relation has replyTo attribute.
 //the replyTo attribute is the userID of the person who ask the question
 
-$queryString = "Match (a:Person),(b:Answer) WHERE a.userID = '" . $getUser . "' AND b.answer = '" . $answer . "' CREATE UNIQUE (a)-[r:ReplyTo {date:'" . $creationTimestamp . "', replyTo:'" . $getReplyTo . "'}]->(b) RETURN r";
+$queryString = "Match (a:Person),(b:Answer) WHERE a.userID = '" . $getUser . "' AND b.answer = '" . $getAnswer . "' CREATE UNIQUE (a)-[r:ReplyTo {date:'" . $creationTimestamp . "', replyTo:'" . $getReplyTo . "'}]->(b) RETURN r";
 $client->sendCypherQuery($queryString);
 $result = $client->getRows();
 

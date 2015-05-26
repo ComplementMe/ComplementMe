@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 header("Content-type: application/json");
 
-
+echo "SETTING CONSTRAINTS <br>";
 //set database constraints
 $queryString = "CREATE CONSTRAINT ON (userID:Person) ASSERT userID.userID IS UNIQUE";
 $client->sendCypherQuery($queryString);
@@ -51,8 +51,10 @@ $client->sendCypherQuery($queryString);
 $result = $client->getRows();
 $JSON_RETURN = json_encode($result);
 echo $JSON_RETURN;
+echo "CONSTRAINTS SET<br>";
 
 
+echo "Clearing DB<br>";
 
 //clear db
 $queryString = "MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n,r";
@@ -61,8 +63,9 @@ $result = $client->getRows();
 $JSON_RETURN = json_encode($result);
 echo $JSON_RETURN;
 
-//bootstrap with standard dataset
+echo "DB Cleared<br>";
 
+//bootstrap with standard dataset, adding nodes....
 $data = array(
     'http://localhost/ComplementMe/CreateNode/CreateUser.php?userID=alice&password=xxx&email=alice@complementme.com&gender=m',
     'http://localhost/ComplementMe/CreateNode/CreateUser.php?userID=bob&password=xxx&email=bob@complementme.com&gender=m',
@@ -74,9 +77,29 @@ $data = array(
 );
 $r = multiRequest($data);
 
-echo '<br>CURL:';
+echo '<br>CURL Bootstrap Nodes:';
 print_r($r);
 
+
+//these will add relations...
+$data = array(
+    'http://localhost/ComplementMe/CreateRelation/LinkUserPostedQnToUser.php?userID=alice&question=can%20you%20swim?&userAsked=bob',
+    'http://localhost/ComplementMe/CreateRelation/LinkUserPostedQnToUser.php?userID=alice&question=can%20you%20swim?&userAsked=charlie',
+    'http://localhost/ComplementMe/CreateRelation/LinkUserPostedAnsToQn.php?userID=bob&answer=no&userReplyTo=alice&question=can%20you%20swim?',
+    'http://localhost/ComplementMe/CreateRelation/LinkUserPostedAnsToQn.php?userID=charlie&answer=yes&userReplyTo=alice&question=can%20you%20swim?'
+);
+$r = multiRequest($data);
+
+echo '<br>CURL Bootstrap Relations:';
+print_r($r);
+
+//
+//
+//
+//
+//
+//
+//
 //from: http://www.phpied.com/simultaneuos-http-requests-in-php-with-curl/
 function multiRequest($data, $options = array()) {
 

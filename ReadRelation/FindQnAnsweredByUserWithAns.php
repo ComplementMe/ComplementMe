@@ -21,10 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 //find all the respondents to this question
 
-$question = htmlspecialchars($_GET['question']);
+$user = htmlspecialchars($_GET['userID']);
 
 
-$queryString = "MATCH (Person)-->(Answer)-->(Question{question:'" . $question . "'}) RETURN Person.userID";
+$queryString = "MATCH (Person{userID:'" . $user . "'})-->(Answer)-->(Question) RETURN Question.question, Answer.answer";
 
 
 $client->sendCypherQuery($queryString);
