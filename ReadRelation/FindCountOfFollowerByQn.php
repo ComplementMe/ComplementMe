@@ -22,9 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 //returns a list of all the people this user follows
 
 
-$getUserName = htmlspecialchars($_GET['userID']);
+$question = htmlspecialchars($_GET['question']);
 
-$queryString = "MATCH (" . $question . " { question:'" . $question . "' })<-[:Follows]-(Person) RETURN Count(Person.userID)";
+$queryString = "MATCH (n:Question{ question:'" . $question . "' })<-[:Follows]-(Person) RETURN Count(Person.userID)";
 
 
 $client->sendCypherQuery($queryString);

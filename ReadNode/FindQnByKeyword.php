@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 //returns a single node of a user
 
 
-$getKeyword = htmlspecialchars($_GET['questionKeyword']);
+$getKeyword = htmlspecialchars($_GET['question']);
 
 
 
-$queryString = "MATCH (n:Question) WHERE n.question =~ '(?i).*" . $getKeyword . ".*' RETURN n.question";
+$queryString = "MATCH (Question)<-[r:Follows]-(Person)  WHERE Question.question =~ '(?i).*" . $getKeyword . ".*'  RETURN Question.question, Question.createdDate, Count(Person.userID)";
 
 
 $client->sendCypherQuery($queryString);

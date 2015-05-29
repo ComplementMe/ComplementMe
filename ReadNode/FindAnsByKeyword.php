@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 //returns a single node of a user
 
 
-$getKeyword = htmlspecialchars($_GET['answerKeyword']);
+$getKeyword = htmlspecialchars($_GET['answer']);
 
 
 
