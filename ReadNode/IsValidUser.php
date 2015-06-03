@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 
 
-$getUserName = htmlspecialchars($_GET['userID']);
-$getPW = htmlspecialchars($_GET['password']);
+$getUserName = htmlspecialchars($_POST['userID']);
+$getPW = htmlspecialchars($_POST['password']);
 
 
 
