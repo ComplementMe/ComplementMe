@@ -52,6 +52,8 @@ $client->sendCypherQuery($queryString);
 $result = $client->getRows();
 $JSON_RETURN = json_encode($result);
 
+
+//send email to the user, containing his new password, which allows him to login.
 $email->addTo($emailTo)
         ->setFrom($ComplementMeNoReply)
         ->setSubject("ComplementMe Account Password Reset")
