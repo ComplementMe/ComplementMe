@@ -34,9 +34,8 @@ $result = $client->getRows();
 
 header("Content-type: application/json");
 
-$JSON_RETURN = json_encode($result);
+$JSON_RETURN1 = json_encode($result);
 
-echo $JSON_RETURN;
 
 //delete node with no relations
 $queryString = "MATCH (n:Question { question: '" . $getQuestion . "' }) DELETE n";
@@ -46,7 +45,12 @@ $result = $client->getRows();
 
 header("Content-type: application/json");
 
-$JSON_RETURN = json_encode($result);
+$JSON_RETURN2 = json_encode($result);
 
-echo $JSON_RETURN;
+if (($JSON_RETURN1 == $JSON_RETURN2)) {
+
+    echo "{\"Status\":\"Question Deleted\"}";
+} else {
+    echo "{\"Status\":\"FAILURE\"}";
+}
 ?>

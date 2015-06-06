@@ -59,8 +59,13 @@ $email->addTo($emailTo)
         ->setSubject("ComplementMe Account Password Reset")
         ->setHtml("Your password has been reset. Please use this temporary password to login, and change your password immediately: " . $randomPW);
 
-$sendgrid->send($email);
+
 
 header("Content-type: application/json");
-echo "{\"status\":\"Email Sent\"}";
+
+if ($sendgrid->send($email)) {
+    echo "{\"Status\":\"Email Sent\"}";
+} else {
+    echo "{\"Status\":\"FAILURE\"}";
+}
 ?>

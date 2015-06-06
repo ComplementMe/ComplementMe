@@ -26,21 +26,27 @@ $getAnswer = htmlspecialchars($_GET['answer']);
 
 //delete node with relations
 
-$queryString = "MATCH (n:Answer { question: '" . $getAnswer . "' })-[r]-() DELETE n,r";
+$queryString = "MATCH (n:Answer { answer: '" . $getAnswer . "' })-[r]-() DELETE n,r";
 
 $client->sendCypherQuery($queryString);
 
 header("Content-type: application/json");
 $result = $client->getRows();
-$JSON_RETURN = json_encode($result);
+$JSON_RETURN1 = json_encode($result);
 
 
 //delete node with no relations
-$queryString = "MATCH (n:Answer { question: '" . $getAnswer . "' }) DELETE n";
+$queryString = "MATCH (n:Answer { answer: '" . $getAnswer . "' }) DELETE n";
 $client->sendCypherQuery($queryString);
 $result = $client->getRows();
 
 header("Content-type: application/json");
-$JSON_RETURN = json_encode($result);
-echo $JSON_RETURN;
+$JSON_RETURN2 = json_encode($result);
+
+if (($JSON_RETURN1 == $JSON_RETURN2)) {
+
+    echo "{\"Status\":\"Answer Deleted\"}";
+} else {
+    echo "{\"Status\":\"FAILURE\"}";
+}
 ?>

@@ -25,7 +25,6 @@ $getUserName = htmlspecialchars($_POST['userID']);
 $getPW = htmlspecialchars($_POST['password']);
 
 
-
 $queryString = "MATCH (n:Person { userID: '" . $getUserName . "' , password: '" . $getPW . "'}) RETURN n";
 
 
@@ -35,8 +34,8 @@ $JSON_RETURN = json_encode($result);
 header("Content-type: application/json");
 
 if ($JSON_RETURN == "[]") {
-    echo "{\"Status\":\"invalid\"}";
+    echo "{\"Status\":\"Invalid\"}";
 } else {
-    echo "{\"Status\":\"valid\"}";
+    echo "{\"Status\":\"Valid\"}";
 }
 ?>

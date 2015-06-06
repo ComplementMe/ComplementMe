@@ -32,5 +32,10 @@ $client->sendCypherQuery($queryString);
 $result = $client->getRows();
 $JSON_RETURN = json_encode($result);
 header("Content-type: application/json");
-echo $JSON_RETURN;
+if (($JSON_RETURN == "null")) {
+
+    echo "{\"Status\":\"Relationship Deleted\"}";
+} else {
+    echo "{\"Status\":\"FAILURE\"}";
+}
 ?>

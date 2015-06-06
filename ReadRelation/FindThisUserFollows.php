@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 $getUserName = htmlspecialchars($_GET['userID']);
 
 //MATCH (dawn { name:'dawn' })-->(Person) RETURN Person.name
-$queryString = "MATCH (" . $getUserName . " { userID:'" . $getUserName . "' })-->(Person) RETURN Person.userID";
+$queryString = "MATCH (Person { userID:'" . $getUserName . "' })-[r:Follows]->(n) RETURN n.userID";
 
 
 $client->sendCypherQuery($queryString);
