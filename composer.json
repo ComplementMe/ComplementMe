@@ -1,5 +1,7 @@
 {
     "require": {
-        "neoxygen/neoclient": "~2.0"
+        "neoxygen/neoclient": "~2.0",
+        "sendgrid/sendgrid": "~3.2"
     }
 }
+
