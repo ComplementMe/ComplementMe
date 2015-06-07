@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 $question = htmlspecialchars($_GET['question']);
 
 //MATCH (dawn { name:'dawn' })-->(Person) RETURN Person.name
-$queryString = "MATCH (" . $question . " { question:'" . $question . "' })<--(Answer) RETURN Answer.answer";
+$queryString = "MATCH (Question {question:'" . $question . "' })<-[r:AnswerOf]-(Answer) RETURN Answer.answer";
 
 
 $client->sendCypherQuery($queryString);

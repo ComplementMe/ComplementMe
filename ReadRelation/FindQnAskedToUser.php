@@ -19,13 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 
-//returns a list of all the people this user follows
+//returns a list of all qns that are asked to this user, with the accompanying asker.
 
 
 $userID = htmlspecialchars($_GET['userID']);
 
-//MATCH (dawn { name:'dawn' })-->(Person) RETURN Person.name
-$queryString = "MATCH (" . $userID . " { userID:'" . $userID . "' })<--(Question) RETURN Question.question";
+$queryString = "MATCH (a:Person { userID:'" . $userID . "' })<-[r1:AskedBy]-(Question)-[r2:AskTo{askTo:'" . $userID . "'}]-(p:Person) RETURN DISTINCT Question.question as QUESTION, p.userID as ASKER";
 
 
 $client->sendCypherQuery($queryString);

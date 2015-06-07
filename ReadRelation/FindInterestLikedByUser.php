@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 $getUserName = htmlspecialchars($_GET['userID']);
 
 
-$queryString = "MATCH (" . $getUserName . " { userID:'" . $getUserName . "' })-[:Dislikes]->(Interest) RETURN Interest.interest";
+$queryString = "MATCH (Person { userID:'" . $getUserName . "' })-[r:Likes]->(i:Interest) RETURN i.interest";
 
 
 $client->sendCypherQuery($queryString);

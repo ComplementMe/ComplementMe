@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 //updates an existing interest
 //takes in the existing interest, updates it with the new question as specified in GET parameters
 
-$modifiedBy = htmlspecialchars($_GET['userID']);
+$modifiedBy = htmlspecialchars($_GET['modifiedby']);
 $getInterest = strtoupper(htmlspecialchars($_GET['interest']));
 $getNewInterest = strtoupper(htmlspecialchars($_GET['newInterest']));
 

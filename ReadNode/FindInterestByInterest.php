@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 
 
-$getInterest = htmlspecialchars($_GET['interest']);
+$getInterest = strtoupper(htmlspecialchars($_GET['interest']));
 
 
 
